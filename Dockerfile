@@ -18,8 +18,9 @@ RUN yum install -y gcc \
     && yum remove -y golang \
     && cp -r /install_tmp/go /usr/local/ \
     && ln -s /usr/local/go/bin/go  /usr/bin/go \
+    && ln -s /usr/local/go/bin/gofmt  /usr/bin/gofmt \
     && rm -rf /install_tmp \
-    && yum remove -y gcc wget tar gzip cpp golang-src \
+    && yum remove -y wget tar gzip golang-src \
     #  locales
     && rm -rf /usr/{{lib,share}/locale,{lib,lib64}/gconv,bin/localedef,sbin/build-locale-archive} \
     #  docs and man pages
