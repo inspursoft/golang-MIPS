@@ -4,7 +4,8 @@ ENV GOLANG_VERSION 1.12.9
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
-RUN yum install -y gcc \
+RUN yum install -y openssh openssh-clients openssh-server \
+    && yum install -y gcc \
     && yum install -y wget \
     && yum install -y tar \
     && yum install -y gzip \
@@ -20,7 +21,6 @@ RUN yum install -y gcc \
     && ln -s /usr/local/go/bin/go  /usr/bin/go \
     && ln -s /usr/local/go/bin/gofmt  /usr/bin/gofmt \
     && rm -rf /install_tmp \
-    && yum remove -y wget tar gzip golang-src \
     #  locales
     && rm -rf /usr/{{lib,share}/locale,{lib,lib64}/gconv,bin/localedef,sbin/build-locale-archive} \
     #  docs and man pages
