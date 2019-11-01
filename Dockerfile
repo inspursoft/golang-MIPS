@@ -1,6 +1,6 @@
 FROM inspursoft/baseimage-mips:1.0
 
-ENV GOLANG_VERSION 1.12.9
+ENV GOLANG_VERSION 1.13.4
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
@@ -10,8 +10,8 @@ RUN yum install -y openssh openssh-clients openssh-server \
     && yum install -y tar \
     && yum install -y gzip \
     && cd / && mkdir install_tmp && cd install_tmp \
-    && wget https://dl.google.com/go/go1.12.9.src.tar.gz \
-    && tar -zxvf go1.12.9.src.tar.gz \
+    && wget https://dl.google.com/go/go1.13.4.src.tar.gz \
+    && tar -zxvf go1.13.4.src.tar.gz \
     && wget http://download.cs2c.com.cn/neokylin/server/releases/7.0/ls_64/Packages/golang-bin-1.9.2-4.ns7_4.01.mips64el.rpm \
     && rpm -ivh golang-bin-1.9.2-4.ns7_4.01.mips64el.rpm --nodeps \
     && yum install -y golang \
@@ -30,7 +30,8 @@ RUN yum install -y openssh openssh-clients openssh-server \
     #  i18n
     && rm -rf /usr/share/i18n \
     #  sln
-    && rm -rf /sbin/sln
+    && rm -rf /sbin/sln \
+    && yum clean all && yum makecache
 
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 
